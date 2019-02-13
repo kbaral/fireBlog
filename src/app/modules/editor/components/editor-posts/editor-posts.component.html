@@ -1,3 +1,17 @@
-<p>
-  editor-posts works!
-</p>
+<!-- <p>Logged in as {{ user.displayName }}!</p> -->
+<h4>Create New Post</h4>
+<form class="py-2" #f="ngForm">
+	<div class="form-group">
+		<input class="form-control" type="text" name="post-title" [(ngModel)]="postTitle"  #new_post_title="ngModel"  placeholder="Enter Post Title" (keyup.enter)="onEnter(new_post_title);" required>
+	</div>
+	<button class="btn btn-dark" (click)="onEnter()" [disabled]="new_post_title.invalid">Save</button>
+</form>
+ 
+<h3>Posts</h3>
+<ul class="list-unstyled">
+	<li class="mb-3 pb-2" *ngFor="let post of posts | async">
+       	{{ post.data.title }}  <a class="btn btn-sm btn-dark" href="/editor/post/{{ post.id }}">Open</a>
+     	</li>
+</ul>
+ 
+<p class="text-right small"><a href="/auth/logout">Logout</a></p>
